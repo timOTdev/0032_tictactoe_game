@@ -5,44 +5,44 @@ class Square extends Component {
     e.preventDefault()
     const position = e.target.id
     let newBoard = [...this.props.board]
-    const player = this.props.player
+    let { currentTurn } = this.props
 
     switch (position) {
         case "0":
-          newBoard[position] = player;
-          this.props.markBoard(newBoard)
+          newBoard[position] = currentTurn;
+          this.props.markBoard(newBoard, currentTurn)
           break;
         case "1":
-          newBoard[position] = player;
-          this.props.markBoard(newBoard)
+          newBoard[position] = currentTurn;
+          this.props.markBoard(newBoard, currentTurn)
           break;
         case "2":
-          newBoard[position] = player;
-          this.props.markBoard(newBoard)
+          newBoard[position] = currentTurn;
+          this.props.markBoard(newBoard, currentTurn)
           break;
         case "3":
-          newBoard[position] = player;
-          this.props.markBoard(newBoard)
+          newBoard[position] = currentTurn;
+          this.props.markBoard(newBoard, currentTurn)
           break;
         case "4":
-          newBoard[position] = player;
-          this.props.markBoard(newBoard)
+          newBoard[position] = currentTurn;
+          this.props.markBoard(newBoard, currentTurn)
           break;
         case "5":
-          newBoard[position] = player;
-          this.props.markBoard(newBoard)
+          newBoard[position] = currentTurn;
+          this.props.markBoard(newBoard, currentTurn)
           break;
         case "6":
-          newBoard[position] = player;
-          this.props.markBoard(newBoard)
+          newBoard[position] = currentTurn;
+          this.props.markBoard(newBoard, currentTurn)
           break;
         case "7":
-          newBoard[position] = player;
-          this.props.markBoard(newBoard)
+          newBoard[position] = currentTurn;
+          this.props.markBoard(newBoard, currentTurn)
           break;
         case "8":
-          newBoard[position] = player;
-          this.props.markBoard(newBoard)
+          newBoard[position] = currentTurn;
+          this.props.markBoard(newBoard, currentTurn)
           break;
         default:
           break;
