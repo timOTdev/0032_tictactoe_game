@@ -1,14 +1,25 @@
 html, body {
   margin: 0 auto;
   padding: 0;
+  text-align: center;
 }
 
-.Row {
+.Squares {
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 31em;
   margin: 0 auto;
 }
 
 .Square {
   border: 1px solid black;
-  padding: 2%;
+  width: 10em;
+  height: 10em;
+  padding: 0;
+  font-size: 1em;
+}
+
+.Square:hover {
+  background: goldenrod;
 }

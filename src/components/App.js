@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
 
-import Row from './Row'
+import Squares from './Squares'
 
 class App extends Component {
   constructor () {
     super()
     this.state = {
-      player: "",
-      board: {}
+      board: ["","","","","","","","",""],
+      player: ""
     }
+  }
+  // Win combos: 012, 345, 678, 036, 147, 258, 048, 246
+
+  componentDidMount() {
+    this.updatePlayerChoice()
   }
 
   updatePlayerChoice = () => {
@@ -18,8 +23,10 @@ class App extends Component {
       : this.updatePlayerChoice()
   }
 
-  componentDidMount() {
-    this.updatePlayerChoice()
+  markBoard = (newBoard) => {
+    let board = [...this.state.board]
+    board = newBoard
+    this.setState({ board })
   }
 
   render() {
@@ -27,9 +34,7 @@ class App extends Component {
       <div className="App">
         <h1>Tic-Tac-Toe Game</h1>
         <p>You are player "{this.state.player}."</p>
-        <Row />
-        <Row />
-        <Row />
+        <Squares board={this.state.board} player={this.state.player} markBoard={this.markBoard} />
       </div>
     );
   }
