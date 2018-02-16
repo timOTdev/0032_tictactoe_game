@@ -39,86 +39,125 @@ class App extends Component {
   
   // Win combos: 012, 345, 678, 036, 147, 258, 048, 246
   checkWinConditions = (updatedBoard) => {
-    if (updatedBoard[0] === "x" && updatedBoard[1] === "x" && updatedBoard[2] === "x") {
+    if (updatedBoard.every(item => item !== "")) {
       let board = [...this.state.board]
-      alert("Player X wins!")
-      board = ["","","","","","","","",""]
-      this.setState({ board })
+      setTimeout(() => {
+        alert("It's a tie game!")
+        board = ["","","","","","","","",""]
+        this.setState({ board })
+      }, 200)
+    } else if (updatedBoard[0] === "x" && updatedBoard[1] === "x" && updatedBoard[2] === "x") {
+      let board = [...this.state.board]
+      setTimeout(() => {
+        alert("Player X wins!")
+        board = ["","","","","","","","",""]
+        this.setState({ board })
+      }, 200)
     } else if (updatedBoard[3] === "x" && updatedBoard[4] === "x" && updatedBoard[5] === "x") {
-      alert("Player X wins!")
       let board = [...this.state.board]
-      board = ["","","","","","","","",""]
-      this.setState({ board })
+      setTimeout(() => {
+        alert("Player X wins!")
+        board = ["","","","","","","","",""]
+        this.setState({ board })
+      }, 200)
     } else if (updatedBoard[6] === "x" && updatedBoard[7] === "x" && updatedBoard[8] === "x") {
-      alert("Player X wins!")
       let board = [...this.state.board]
-      board = ["","","","","","","","",""]
-      this.setState({ board })
+      setTimeout(() => {
+        alert("Player X wins!")
+        board = ["","","","","","","","",""]
+        this.setState({ board })
+      }, 200)
     } else if (updatedBoard[0] === "x" && updatedBoard[3] === "x" && updatedBoard[6] === "x") {
-      alert("Player X wins!")
       let board = [...this.state.board]
-      board = ["","","","","","","","",""]
-      this.setState({ board })
+      setTimeout(() => {
+        alert("Player X wins!")
+        board = ["","","","","","","","",""]
+        this.setState({ board })
+      }, 200)
     } else if (updatedBoard[1] === "x" && updatedBoard[4] === "x" && updatedBoard[7] === "x") {
-      alert("Player X wins!")
       let board = [...this.state.board]
-      board = ["","","","","","","","",""]
-      this.setState({ board })
+      setTimeout(() => {
+        alert("Player X wins!")
+        board = ["","","","","","","","",""]
+        this.setState({ board })
+      }, 200)
     } else if (updatedBoard[2] === "x" && updatedBoard[5] === "x" && updatedBoard[8] === "x") {
-      alert("Player X wins!")
       let board = [...this.state.board]
-      board = ["","","","","","","","",""]
-      this.setState({ board })
+      setTimeout(() => {
+        alert("Player X wins!")
+        board = ["","","","","","","","",""]
+        this.setState({ board })
+      }, 200)
     } else if (updatedBoard[0] === "x" && updatedBoard[4] === "x" && updatedBoard[8] === "x") {
-      alert("Player X wins!")
       let board = [...this.state.board]
-      board = ["","","","","","","","",""]
-      this.setState({ board })
+      setTimeout(() => {
+        alert("Player X wins!")
+        board = ["","","","","","","","",""]
+        this.setState({ board })
+      }, 200)
     } else if (updatedBoard[2] === "x" && updatedBoard[4] === "x" && updatedBoard[6] === "x") {
-      alert("Player X wins!")
       let board = [...this.state.board]
-      board = ["","","","","","","","",""]
-      this.setState({ board })
+      setTimeout(() => {
+        alert("Player X wins!")
+        board = ["","","","","","","","",""]
+        this.setState({ board })
+      }, 200)
     } else if (updatedBoard[0] === "o" && updatedBoard[1] === "o" && updatedBoard[2] === "o") {
-      alert("Player O wins!")
       let board = [...this.state.board]
-      board = ["","","","","","","","",""]
-      this.setState({ board })
+      setTimeout(() => {
+        board = ["","","","","","","","",""]
+        this.setState({ board })
+        alert("Player O wins!")
+      }, 200)
     } else if (updatedBoard[3] === "o" && updatedBoard[4] === "o" && updatedBoard[5] === "o") {
-      alert("Player O wins!")
       let board = [...this.state.board]
-      board = ["","","","","","","","",""]
-      this.setState({ board })
+      setTimeout(() => {
+        board = ["","","","","","","","",""]
+        this.setState({ board })
+        alert("Player O wins!")
+      }, 200)
     } else if (updatedBoard[6] === "o" && updatedBoard[7] === "o" && updatedBoard[8] === "o") {
-      alert("Player O wins!")
       let board = [...this.state.board]
-      board = ["","","","","","","","",""]
-      this.setState({ board })
+      setTimeout(() => {
+        board = ["","","","","","","","",""]
+        this.setState({ board })
+        alert("Player O wins!")
+      }, 200)
     } else if (updatedBoard[0] === "o" && updatedBoard[3] === "o" && updatedBoard[6] === "o") {
-      alert("Player O wins!")
       let board = [...this.state.board]
-      board = ["","","","","","","","",""]
-      this.setState({ board })
+      setTimeout(() => {
+        board = ["","","","","","","","",""]
+        this.setState({ board })
+        alert("Player O wins!")
+      }, 200)
     } else if (updatedBoard[1] === "o" && updatedBoard[4] === "o" && updatedBoard[7] === "o") {
-      alert("Player O wins!")
       let board = [...this.state.board]
-      board = ["","","","","","","","",""]
-      this.setState({ board })
+      setTimeout(() => {
+        board = ["","","","","","","","",""]
+        this.setState({ board })
+        alert("Player O wins!")
+      }, 200)
     } else if (updatedBoard[2] === "o" && updatedBoard[5] === "o" && updatedBoard[8] === "o") {
-      alert("Player O wins!")
       let board = [...this.state.board]
-      board = ["","","","","","","","",""]
-      this.setState({ board })
+      setTimeout(() => {
+        board = ["","","","","","","","",""]
+        this.setState({ board })
+        alert("Player O wins!")
+      }, 200)
     } else if (updatedBoard[0] === "o" && updatedBoard[4] === "o" && updatedBoard[8] === "o") {
-      alert("Player O wins!")
       let board = [...this.state.board]
-      board = ["","","","","","","","",""]
-      this.setState({ board })
+      setTimeout(() => {
+        board = ["","","","","","","","",""]
+        this.setState({ board })
+        alert("Player O wins!")
+      }, 200)
     } else if (updatedBoard[2] === "o" && updatedBoard[4] === "o" && updatedBoard[6] === "o") {
-      alert("Player O wins!")
       let board = [...this.state.board]
-      board = ["","","","","","","","",""]
-      this.setState({ board })
+      setTimeout(() => {
+        board = ["","","","","","","","",""]
+        this.setState({ board })
+        alert("Player O wins!")
+      }, 200)
     }
   }
 
