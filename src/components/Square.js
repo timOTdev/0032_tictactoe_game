@@ -7,6 +7,7 @@ class Square extends Component {
     let newBoard = [...this.props.board]
     let { currentTurn } = this.props
 
+    if (newBoard[position] === "") {
     switch (position) {
         case "0":
           newBoard[position] = currentTurn;
@@ -46,6 +47,7 @@ class Square extends Component {
           break;
         default:
           break;
+    }
     }
   }
 
