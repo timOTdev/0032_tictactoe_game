@@ -6,7 +6,7 @@ class App extends Component {
   constructor () {
     super()
     this.state = {
-      board: ["","","","","","","","",""],
+      board: ["o","","x","x","","x","","o","o"],
       player: "",
       computer: "",
       currentTurn: ""
@@ -80,17 +80,35 @@ class App extends Component {
       }, 200)
     }
   }
+  
+  miniMax = (board, currentTurn) => {
+    let computer = this.state.computer
+    let player = this.state.player
+    let moves = [];
+    let newBoard = [];
+    board.forEach( (value, index) => value === "" ? moves.push(index) : null)
+    
+    for (let emptySquare of moves) {
+      let move = {};
+      move.index = emptySquare
+      newBoard.push(move)
+    }
+    if (currentTurn === computer) {
+      let playSquares = Object.values(newBoard).map( (value) => value.index)
+      board[playSquares[0]] = computer;
+      this.setState({ board })
+    }
+    this.setState({ currentTurn: player })
+  }
 
   markBoard = (newBoard, currentTurn) => {
     let board = [...this.state.board]
     board = newBoard
-    if (currentTurn === "x") {
-      currentTurn = "o"
-    } else if (currentTurn === "o") {
-      currentTurn = "x"
-    } 
+    currentTurn === "x" ? currentTurn = "o" 
+      : currentTurn === "o" ? currentTurn = "x" 
+          : null
     this.setState({ board, currentTurn })
-
+    this.miniMax(board, currentTurn)
     this.checkWinConditions(board)
   }
 
