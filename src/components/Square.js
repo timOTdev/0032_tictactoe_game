@@ -5,45 +5,45 @@ class Square extends Component {
     e.preventDefault()
     const position = e.target.id
     let newBoard = [...this.props.board]
-    let { currentTurn } = this.props
+    let { turn } = this.props
 
     if (newBoard[position] === "") {
     switch (position) {
         case "0":
-          newBoard[position] = currentTurn;
-          this.props.markBoard(newBoard, currentTurn)
+          newBoard[position] = turn;
+          this.props.humanMove(newBoard)
           break;
         case "1":
-          newBoard[position] = currentTurn;
-          this.props.markBoard(newBoard, currentTurn)
+          newBoard[position] = turn;
+          this.props.humanMove(newBoard)
           break;
         case "2":
-          newBoard[position] = currentTurn;
-          this.props.markBoard(newBoard, currentTurn)
+          newBoard[position] = turn;
+          this.props.humanMove(newBoard)
           break;
         case "3":
-          newBoard[position] = currentTurn;
-          this.props.markBoard(newBoard, currentTurn)
+          newBoard[position] = turn;
+          this.props.humanMove(newBoard)
           break;
         case "4":
-          newBoard[position] = currentTurn;
-          this.props.markBoard(newBoard, currentTurn)
+          newBoard[position] = turn;
+          this.props.humanMove(newBoard)
           break;
         case "5":
-          newBoard[position] = currentTurn;
-          this.props.markBoard(newBoard, currentTurn)
+          newBoard[position] = turn;
+          this.props.humanMove(newBoard)
           break;
         case "6":
-          newBoard[position] = currentTurn;
-          this.props.markBoard(newBoard, currentTurn)
+          newBoard[position] = turn;
+          this.props.humanMove(newBoard)
           break;
         case "7":
-          newBoard[position] = currentTurn;
-          this.props.markBoard(newBoard, currentTurn)
+          newBoard[position] = turn;
+          this.props.humanMove(newBoard)
           break;
         case "8":
-          newBoard[position] = currentTurn;
-          this.props.markBoard(newBoard, currentTurn)
+          newBoard[position] = turn;
+          this.props.humanMove(newBoard)
           break;
         default:
           break;

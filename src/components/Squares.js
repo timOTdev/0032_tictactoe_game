@@ -10,9 +10,9 @@ const Squares = (props) => {
         id={key} 
         board={props.board} 
         player={props.player} 
-        currentTurn={props.currentTurn}
+        turn={props.turn}
         content={content}
-        markBoard={props.markBoard} />) }
+        humanMove={props.humanMove} />) }
     </div>
   )
 }

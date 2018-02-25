@@ -6,10 +6,12 @@ class App extends Component {
   constructor () {
     super()
     this.state = {
-      board: ["o","","x","x","","x","","o","o"],
-      player: "",
-      computer: "",
-      currentTurn: ""
+      // board: ["o","","x","x","","x","","o","o"],
+      board: ["x","","","","x","","o","","o"],
+      // board: ["","","","","","","","",""],
+      human: "x",
+      computer: "o",
+      turn: "x"
     }
   }
   
@@ -18,110 +20,168 @@ class App extends Component {
   }
   
   updatePlayerChoice = () => {
-    const playerChoice = prompt("Would you like to be X's or O's? Type x or o.")
-    const firstTurn = prompt("Want to go first? Type y.")
-    if (playerChoice === "x") {
-      if(firstTurn === "y") {
-        this.setState({ player: "x", computer: "o", currentTurn: "x" })
-      } else {
-        this.setState({ player: "x", computer: "o", currentTurn: "o" })
-      }
-    } else if (playerChoice === "o") {
-      if(firstTurn === "y") {
-        this.setState({ player: "o", computer: "x", currentTurn: "o" })
-      } else {
-        this.setState({ player: "o", computer: "x", currentTurn: "x" })
-      }
-    } else {
-      this.updatePlayerChoice();
-    }
-  }
-  
-  // Win combos: 012, 345, 678, 036, 147, 258, 048, 246
-  checkWinConditions = (updatedBoard) => {
-    if (updatedBoard.every(item => item !== "")) {
-      let board = [...this.state.board]
-      setTimeout(() => {
-        alert("It's a tie game!")
-        board = ["","","","","","","","",""]
-        this.setState({ board })
-      }, 200)
-    } else if (
-              (updatedBoard[0] === "x" && updatedBoard[1] === "x" && updatedBoard[2] === "x") ||
-              (updatedBoard[3] === "x" && updatedBoard[4] === "x" && updatedBoard[5] === "x") ||
-              (updatedBoard[6] === "x" && updatedBoard[7] === "x" && updatedBoard[8] === "x") ||
-              (updatedBoard[0] === "x" && updatedBoard[3] === "x" && updatedBoard[6] === "x") ||
-              (updatedBoard[1] === "x" && updatedBoard[4] === "x" && updatedBoard[7] === "x") ||
-              (updatedBoard[2] === "x" && updatedBoard[5] === "x" && updatedBoard[8] === "x") ||
-              (updatedBoard[0] === "x" && updatedBoard[4] === "x" && updatedBoard[8] === "x") ||
-              (updatedBoard[2] === "x" && updatedBoard[4] === "x" && updatedBoard[6] === "x") 
-              ) {
-      let board = [...this.state.board]
-      setTimeout(() => {
-        alert("Player X wins!")
-        board = ["","","","","","","","",""]
-        this.setState({ board })
-      }, 200)
-    } else if (
-              (updatedBoard[0] === "o" && updatedBoard[1] === "o" && updatedBoard[2] === "o") ||
-              (updatedBoard[3] === "o" && updatedBoard[4] === "o" && updatedBoard[5] === "o") ||
-              (updatedBoard[6] === "o" && updatedBoard[7] === "o" && updatedBoard[8] === "o") ||
-              (updatedBoard[0] === "o" && updatedBoard[3] === "o" && updatedBoard[6] === "o") ||
-              (updatedBoard[1] === "o" && updatedBoard[4] === "o" && updatedBoard[7] === "o") ||
-              (updatedBoard[2] === "o" && updatedBoard[5] === "o" && updatedBoard[8] === "o") ||
-              (updatedBoard[0] === "o" && updatedBoard[4] === "o" && updatedBoard[8] === "o") ||
-              (updatedBoard[2] === "o" && updatedBoard[4] === "o" && updatedBoard[6] === "o") 
-              ) {
-      let board = [...this.state.board]
-      setTimeout(() => {
-        board = ["","","","","","","","",""]
-        this.setState({ board })
-        alert("Player O wins!")
-      }, 200)
-    }
-  }
-  
-  miniMax = (board, currentTurn) => {
-    let computer = this.state.computer
-    let player = this.state.player
-    let moves = [];
-    let newBoard = [];
-    board.forEach( (value, index) => value === "" ? moves.push(index) : null)
-    
-    for (let emptySquare of moves) {
-      let move = {};
-      move.index = emptySquare
-      newBoard.push(move)
-    }
-    if (currentTurn === computer) {
-      let playSquares = Object.values(newBoard).map( (value) => value.index)
-      board[playSquares[0]] = computer;
-      this.setState({ board })
-    }
-    this.setState({ currentTurn: player })
+    // const playerChoice = prompt("Would you like to be X's or O's? Type x or o.")
+    // const firstTurn = prompt("Want to go first? Type y.")
+    // if (playerChoice === "x") {
+    //   if(firstTurn === "y") {
+    //     this.setState({ human: "x", computer: "o", turn: "x" })
+    //   } else {
+    //     this.setState({ human: "x", computer: "o", turn: "o" })
+    //   }
+    // } else if (playerChoice === "o") {
+    //   if(firstTurn === "y") {
+    //     this.setState({ human: "o", computer: "x", turn: "o" })
+    //   } else {
+    //     this.setState({ human: "o", computer: "x", turn: "x" })
+    //   }
+    // } else {
+    //   this.updatePlayerChoice();
+    // }
   }
 
-  markBoard = (newBoard, currentTurn) => {
+  findEmptySquares = (board) => {
+    let emptySquares = [];
+    board.forEach( (value, index) => value === "" ? emptySquares.push(index) : null)
+    return emptySquares
+  }
+
+  checkWin = (board, turn) => {
+    if (
+      (board[0] === turn && board[1] === turn && board[2] === turn) ||
+      (board[3] === turn && board[4] === turn && board[5] === turn) ||
+      (board[6] === turn && board[7] === turn && board[8] === turn) ||
+      (board[0] === turn && board[3] === turn && board[6] === turn) ||
+      (board[1] === turn && board[4] === turn && board[7] === turn) ||
+      (board[2] === turn && board[5] === turn && board[8] === turn) ||
+      (board[0] === turn && board[4] === turn && board[8] === turn) ||
+      (board[2] === turn && board[4] === turn && board[6] === turn) 
+      ) {
+      setTimeout(() => {
+        board = ["","","","","","","","",""]
+        this.setState({ board })
+        return alert(turn + " wins!")
+      }, 1)
+    } 
+  }
+
+  winning = (board, turn) => {
+    if (
+      (board[0] === turn && board[1] === turn && board[2] === turn) ||
+      (board[3] === turn && board[4] === turn && board[5] === turn) ||
+      (board[6] === turn && board[7] === turn && board[8] === turn) ||
+      (board[0] === turn && board[3] === turn && board[6] === turn) ||
+      (board[1] === turn && board[4] === turn && board[7] === turn) ||
+      (board[2] === turn && board[5] === turn && board[8] === turn) ||
+      (board[0] === turn && board[4] === turn && board[8] === turn) ||
+      (board[2] === turn && board[4] === turn && board[6] === turn) 
+    ) {
+      return true
+    }
+    else {
+      return false
+    }
+  }
+  
+  miniMax = (board, depth, turn) => {
+    let { human, computer } = this.state
+    
+    // Make array of empty squares
+    let newBoard = [...board]
+    let emptySquares = this.findEmptySquares(newBoard)
+    
+    // // Check terminal states
+    if (this.winning(newBoard, human)) {
+      return depth -10
+    }
+    else if (this.winning(newBoard, computer)) {
+      return 10 - depth
+    } 
+    else if (emptySquares.length === 0) {
+      return 0
+    }
+    
+    // Keep index and result of every move
+    let moves = []
+    for (let emptySquare of emptySquares) {
+      let move = {}
+      move.index = emptySquare
+      move.depth = depth
+      newBoard[emptySquare] = turn
+      
+      if (turn === computer) {
+        let result = this.miniMax(newBoard, depth + 1, human)
+        move.result = result
+      } else {
+        let result = this.miniMax(newBoard, depth + 1, computer)
+        move.result = result
+      }
+      moves.push(move)
+    }
+    console.log(moves)
+    
+    // Find the best move each turn and store it
+    let bestMove
+    if (turn === computer) {
+      let bestScore = -10000
+      for (let move of moves) {
+        if (move.result > bestScore) {
+          bestScore = move.result
+          bestMove = move.index
+        }
+      }
+    } else {
+      let bestScore = 10000
+      for (let move of moves) {
+        if (move.result < bestScore) {
+          bestScore = move.result
+          bestMove = move.index
+        }
+      }
+    }
+    return bestMove
+  }
+
+  switchTurn = () => {
+    let {turn} = this.state
+    if (turn === "x") {
+      turn = "o"
+      this.setState({ turn })
+    } else if (turn === "o") {
+      turn = "x"
+      this.setState({ turn })
+    }
+  }
+
+  aiMove = (board) => {
+    let {computer} = this.state
+    let depth = 0
+    this.switchTurn()
+    let result = this.miniMax(board, depth, computer)
+    console.log(result)
+    this.checkWin(board, computer)
+  }
+
+  humanMove = (newBoard) => {
+    let {human} = this.state
     let board = [...this.state.board]
     board = newBoard
-    currentTurn === "x" ? currentTurn = "o" 
-      : currentTurn === "o" ? currentTurn = "x" 
-          : null
-    this.setState({ board, currentTurn })
-    this.miniMax(board, currentTurn)
-    this.checkWinConditions(board)
+    this.setState({ board })
+    this.checkWin(board, human)
+    this.aiMove(board)
   }
 
   render() {
     return (
       <div className="App">
         <h1>Tic-Tac-Toe Game</h1>
-        <p>You are player "{this.state.player}."</p>
+        <p>You are {this.state.human}.</p>
+        <p>Computer is {this.state.computer}.</p>
+        <p>Current turn is {this.state.turn}.</p>
         <Squares 
           board={this.state.board} 
-          player={this.state.player} 
-          currentTurn={this.state.currentTurn}
-          markBoard={this.markBoard} />
+          human={this.state.human} 
+          turn={this.state.turn}
+          humanMove={this.humanMove} />
       </div>
     );
   }
