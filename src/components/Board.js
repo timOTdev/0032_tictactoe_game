@@ -8,7 +8,7 @@ class Board extends Component {
     if (this.props.board[index] !== "X" && this.props.board[index] !== "O") {
       value = ""
     } else {
-      value = this.props.currentSquare[index]
+      value = this.props.board[index]
     }
 
     return (
