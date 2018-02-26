@@ -9,11 +9,18 @@ class App extends Component {
       board: [0, 1, 2, 3, 4, 5, 6, 7, 8],
     }
   }
-  
+
+  updateSquare = (e, index) => {
+    e.preventDefault()
+    console.log(index)
+  }
+
   render() {
     return (
       <div className="App">
-        <Board {...this.state} />
+        <Board {...this.state} 
+          updateSquare={this.updateSquare}
+        />
       </div>
     );
   }

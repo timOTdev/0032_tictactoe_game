@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 
 import Square from './Square'
 
-class Board extends Component {  
+class Board extends Component {
   createSquare = (index) => {
     let value
-
     if (this.props.board[index] !== "X" && this.props.board[index] !== "O") {
       value = ""
     } else {
@@ -16,6 +15,7 @@ class Board extends Component {
       <Square
         value={value}
         index={index}
+        updateSquare={this.props.updateSquare}
       />
     )
   }
