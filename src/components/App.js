@@ -13,6 +13,39 @@ class App extends Component {
     }
   }
 
+  checkWin = (board, turn) => {
+    if (
+      (board[0] === turn && board[1] === turn && board[2] === turn) ||
+      (board[3] === turn && board[4] === turn && board[5] === turn) ||
+      (board[6] === turn && board[7] === turn && board[8] === turn) ||
+      (board[0] === turn && board[3] === turn && board[6] === turn) ||
+      (board[1] === turn && board[4] === turn && board[7] === turn) ||
+      (board[2] === turn && board[5] === turn && board[8] === turn) ||
+      (board[0] === turn && board[4] === turn && board[8] === turn) ||
+      (board[2] === turn && board[4] === turn && board[6] === turn) 
+      ) {
+      setTimeout(() => {
+        board = ["","","","","","","","",""]
+        this.setState({ board })
+        return alert(turn + " wins!")
+      }, 1)
+    } 
+  }
+
+  findEmptySquares = (board) => {
+    let emptySquares = []
+    board.forEach( (value, index) => {
+      if (value !== "X" && value !== "O") {
+        emptySquares.push(index)
+      } 
+      else {
+        return null
+      }
+    })
+    console.log(emptySquares)
+    return emptySquares
+  }
+
   updateSquare = (e, index) => {
     e.preventDefault()
     const { human, computer, turn } = this.state
@@ -25,6 +58,9 @@ class App extends Component {
       turn === computer ? newTurn = human : newTurn = computer
       this.setState({ turn: newTurn })
     }
+    
+    this.checkWin(board, human)
+    this.checkWin(board, computer)
   }
 
   render() {
