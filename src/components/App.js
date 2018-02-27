@@ -34,16 +34,34 @@ class App extends Component {
 
   findEmptySquares = (board) => {
     let emptySquares = []
-    board.forEach( (value, index) => {
-      if (value !== "X" && value !== "O") {
-        emptySquares.push(index)
-      } 
-      else {
-        return null
-      }
-    })
-    console.log(emptySquares)
+    board.forEach((value, index) => value !== "X" && value !== "O" ? emptySquares.push(index) : null)
     return emptySquares
+  }
+
+  winning = (board, turn) => {
+    if (
+      (board[0] === turn && board[1] === turn && board[2] === turn) ||
+      (board[3] === turn && board[4] === turn && board[5] === turn) ||
+      (board[6] === turn && board[7] === turn && board[8] === turn) ||
+      (board[0] === turn && board[3] === turn && board[6] === turn) ||
+      (board[1] === turn && board[4] === turn && board[7] === turn) ||
+      (board[2] === turn && board[5] === turn && board[8] === turn) ||
+      (board[0] === turn && board[4] === turn && board[8] === turn) ||
+      (board[2] === turn && board[4] === turn && board[6] === turn) 
+    ) {
+      return true
+    }
+    else {
+      return false
+    }
+  }
+
+  miniMax = (board, turn) => {
+  }
+
+  aiTurn = (board) => {
+    let { computer } = this.state
+    this.miniMax(board, computer)
   }
 
   updateSquare = (e, index) => {
@@ -51,16 +69,19 @@ class App extends Component {
     const { human, computer, turn } = this.state
     const board = [...this.state.board]
     this.setState({ board })
-    
+    this.switchTurn(board, index, human, computer, turn)
+    this.checkWin(board, human)
+    this.checkWin(board, computer)
+    this.aiTurn(board)
+  }
+
+  switchTurn = (board, index, human, computer, turn) => {
     if (board[index] !== "X" && board[index] !== "O") {
       let newTurn
       board[index] = turn
       turn === computer ? newTurn = human : newTurn = computer
       this.setState({ turn: newTurn })
     }
-    
-    this.checkWin(board, human)
-    this.checkWin(board, computer)
   }
 
   render() {
