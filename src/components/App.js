@@ -57,11 +57,59 @@ class App extends Component {
   }
 
   miniMax = (board, turn) => {
+    const { human, computer } = this.state
+    const newBoard = [...board]
+    const emptySquares = this.findEmptySquares(newBoard)
+    const moves = []
+
+    if (this.winning(newBoard, human)) {
+      return { score: -10 }
+    } else if (this.winning(newBoard, computer)) {
+      return { score: 10 }
+    } else if (emptySquares.length === 0) {
+      return { score: 0 }
+    }
+
+    for (let i = 0; i < emptySquares.length; i++) {
+      const move = {}
+      move.index = emptySquares[i]
+      newBoard[emptySquares[i]] = turn
+
+      if (turn === computer) {
+        const result = this.miniMax(newBoard, human)
+        move.score = result.score
+      } else {
+        const result = this.miniMax(newBoard, computer)
+        move.score = result.score
+      }
+      newBoard[emptySquares[i]] = move.index
+      moves.push(move)
+    }
+    
+    let bestMove
+    if (turn === computer) {
+      let bestScore = -10000
+      for (let i = 0; i < moves.length; i++) {
+        if (moves[i].score > bestScore) {
+          bestScore = moves[i].score
+          bestMove = i
+        }
+      }
+    } else {
+      let bestScore = 10000
+      for (let i = 0; i < moves.length; i++) {
+        if (moves[i].score < bestScore) {
+          bestScore = moves[i].score
+          bestMove = i
+        }
+      }
+    }
+    return moves[bestMove]
   }
 
   aiTurn = (board) => {
     let { computer } = this.state
-    this.miniMax(board, computer)
+    console.log(this.miniMax(board, computer))
   }
 
   updateSquare = (e, index) => {
