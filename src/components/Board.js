@@ -40,7 +40,7 @@ class Board extends Component {
           {this.createSquare(8)}
         </div>
         <span className="menu">Menu</span>
-        <span className="restart">Restart</span>
+        <span className="restart" onClick={(e) => this.props.restartGame(e)}>Restart</span>
       </div>
     )
   }
