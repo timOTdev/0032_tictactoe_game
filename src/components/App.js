@@ -108,8 +108,13 @@ class App extends Component {
   }
 
   aiTurn = (board) => {
-    let { computer } = this.state
-    console.log(this.miniMax(board, computer))
+    let { computer, human, turn } = this.state
+    let newBoard = [...board]
+    let bestMove = this.miniMax(board, computer).index
+    newBoard[bestMove] = computer
+    turn = human
+    this.checkWin(newBoard, computer)
+    this.setState({ board: newBoard, turn })
   }
 
   updateSquare = (e, index) => {

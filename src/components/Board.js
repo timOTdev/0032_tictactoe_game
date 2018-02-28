@@ -39,6 +39,8 @@ class Board extends Component {
           {this.createSquare(7)}
           {this.createSquare(8)}
         </div>
+        <span className="menu">Menu</span>
+        <span className="restart">Restart</span>
       </div>
     )
   }

@@ -25,3 +25,17 @@ button {
   width: 200px;
   font-size: 40px; 
 }
+
+button:hover {
+  background: goldenrod;
+}
+
+span {
+  border: 1px solid black;
+  padding: 1em;
+  margin: 1em;
+}
+
+span:hover {
+  background: goldenrod;
+}
