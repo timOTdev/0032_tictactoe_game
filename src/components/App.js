@@ -1,18 +1,33 @@
 import React, { Component } from 'react'
 
 import Board from './Board'
-
+import StartMenu from './StartMenu'
 class App extends Component {  
   constructor() {
     super()
     this.state = {
       board: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-      human: "X",
-      computer: "O",
-      turn: "X"
+      human: null,
+      computer: null,
+      turn: null,
+      numberOfPlayers: null,
+      humanGoesFirst: null,
     }
   }
-  
+
+  // Start Menu
+  updatePlayers = (numberOfPlayers) => {
+    this.setState({ numberOfPlayers })
+  }
+
+  updateMarkers = (human, computer) => {
+    this.setState({ human, computer })
+  }
+
+  updateTurn = (humanGoesFirst, turn) => {
+    this.setState({ humanGoesFirst, turn })
+  }
+
   // Game Mechanics
   checkWin = (board, turn) => {
     if (
@@ -25,12 +40,11 @@ class App extends Component {
       (board[0] === turn && board[4] === turn && board[8] === turn) ||
       (board[2] === turn && board[4] === turn && board[6] === turn) 
       ) {
-      setTimeout(() => {
-        board = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-        this.setState({ board })
-        return alert(turn + " wins!")
-      }, 1)
-    } 
+        console.log(turn + " wins!")
+    }
+    else if (this.findEmptySquares(board).length === 0) {
+      console.log("Tie Game!")
+    }
   }
 
   switchTurn = (board, index, human, computer, turn) => {
@@ -40,6 +54,13 @@ class App extends Component {
       turn === computer ? newTurn = human : newTurn = computer
       this.setState({ turn: newTurn })
     }
+  }
+
+  aiRandomSquare = (board) => {
+    let { computer, human } = this.state
+    let randomSquare = Math.floor(Math.random() * 9)
+    board[randomSquare] = computer
+    this.setState({ board, turn: human })
   }
 
   aiTurn = (board) => {
@@ -54,20 +75,29 @@ class App extends Component {
 
   updateSquare = (e, index) => {
     e.preventDefault()
-    const { human, computer, turn } = this.state
+    const { human, computer, turn, numberOfPlayers } = this.state
     const board = [...this.state.board]
     this.setState({ board })
-    this.switchTurn(board, index, human, computer, turn)
     this.checkWin(board, human)
-    this.checkWin(board, computer)
-    this.aiTurn(board)
+    this.switchTurn(board, index, human, computer, turn)
+    if (numberOfPlayers === 1) {
+      this.aiTurn(board)
+    } 
   }
 
-  restartGame = (e) => {
+  returnToMenu = (e) => {
     e.preventDefault()
-    let newBoard = [...this.state.board]
-    newBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-    this.setState({ board: newBoard })
+    let newBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    this.setState({ board: newBoard, human: null, computer: null, turn: null, numberOfPlayers: null, humanGoesFirst: null})
+  }
+
+  restartGame = () => {
+    const { numberOfPlayers, humanGoesFirst } = this.state
+    let newBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    this.setState({ board: newBoard})
+    if (numberOfPlayers === 1 && !humanGoesFirst) {
+      this.aiRandomSquare(newBoard)
+    }
   }
 
   // AI Mechanics
@@ -149,10 +179,20 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      { this.state.humanGoesFirst !== null ? (
         <Board {...this.state} 
           updateSquare={this.updateSquare}
+          returnToMenu={this.returnToMenu}
           restartGame={this.restartGame}
-        />
+          aiRandomSquare={this.aiRandomSquare}
+        />)
+        : (<StartMenu 
+            {...this.state} 
+            updatePlayers={this.updatePlayers}
+            updateMarkers={this.updateMarkers}
+            updateTurn={this.updateTurn}
+        />)
+      }
       </div>
     );
   }

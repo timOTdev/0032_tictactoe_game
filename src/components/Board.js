@@ -3,6 +3,13 @@ import React, { Component } from 'react'
 import Square from './Square'
 
 class Board extends Component {
+  componentDidMount () {
+    let { board } = this.props
+    if (this.props.numberOfPlayers === 1 && !this.props.humanGoesFirst) {
+      this.props.aiRandomSquare(board)
+    }
+  }
+
   createSquare = (index) => {
     let value
     if (this.props.board[index] !== "X" && this.props.board[index] !== "O") {
@@ -18,6 +25,11 @@ class Board extends Component {
         updateSquare={this.props.updateSquare}
       />
     )
+  }
+
+  restartHandler = (e) => {
+    e.preventDefault()
+    this.props.restartGame()
   }
 
   render() {
@@ -39,8 +51,8 @@ class Board extends Component {
           {this.createSquare(7)}
           {this.createSquare(8)}
         </div>
-        <span className="menu">Menu</span>
-        <span className="restart" onClick={(e) => this.props.restartGame(e)}>Restart</span>
+        <span className="menu" onClick={(e) => this.props.returnToMenu(e)}>Menu</span>
+        <span className="restart" onClick={(e) => this.restartHandler(e)}>Restart</span>
       </div>
     )
   }
