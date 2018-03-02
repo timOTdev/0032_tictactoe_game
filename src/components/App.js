@@ -12,6 +12,7 @@ class App extends Component {
       turn: null,
       numberOfPlayers: null,
       humanGoesFirst: null,
+      endOfGame: false,
     }
   }
 
@@ -41,18 +42,67 @@ class App extends Component {
       (board[2] === turn && board[4] === turn && board[6] === turn) 
       ) {
         console.log(turn + " wins!")
-    }
-    else if (this.findEmptySquares(board).length === 0) {
-      console.log("Tie Game!")
+        this.setState({ endOfGame: true })
+        this.highlightWinningSquares(board, turn)
+      }
+      else if (this.findEmptySquares(board).length === 0) {
+        console.log("Tie Game!")
+        this.setState({ endOfGame: true })
     }
   }
 
-  switchTurn = (board, index, human, computer, turn) => {
-    if (board[index] !== "X" && board[index] !== "O") {
-      let newTurn
-      board[index] = turn
-      turn === computer ? newTurn = human : newTurn = computer
-      this.setState({ turn: newTurn })
+  unhighlightWiningSquares = () => {
+    document.querySelector(".button0").style.background = null;
+    document.querySelector(".button1").style.background = null;
+    document.querySelector(".button2").style.background = null;
+    document.querySelector(".button3").style.background = null;
+    document.querySelector(".button4").style.background = null;
+    document.querySelector(".button5").style.background = null;
+    document.querySelector(".button6").style.background = null;
+    document.querySelector(".button7").style.background = null;
+    document.querySelector(".button8").style.background = null;
+  }
+
+  highlightWinningSquares = (board, turn) => {
+    if (board[0] === turn && board[1] === turn && board[2] === turn) {
+      document.querySelector(".button0").style.background = "yellow";
+      document.querySelector(".button1").style.background = "yellow";
+      document.querySelector(".button2").style.background = "yellow";
+    }
+    else if (board[3] === turn && board[4] === turn && board[5] === turn) {
+      document.querySelector(".button3").style.background = "yellow";
+      document.querySelector(".button4").style.background = "yellow";
+      document.querySelector(".button5").style.background = "yellow";
+    }
+    else if (board[6] === turn && board[7] === turn && board[8] === turn) {
+      document.querySelector(".button6").style.background = "yellow";
+      document.querySelector(".button7").style.background = "yellow";
+      document.querySelector(".button8").style.background = "yellow";
+    }
+    else if (board[0] === turn && board[3] === turn && board[6] === turn) {
+      document.querySelector(".button0").style.background = "yellow";
+      document.querySelector(".button3").style.background = "yellow";
+      document.querySelector(".button6").style.background = "yellow";
+    }
+    else if (board[1] === turn && board[4] === turn && board[7] === turn) {
+      document.querySelector(".button1").style.background = "yellow";
+      document.querySelector(".button4").style.background = "yellow";
+      document.querySelector(".button7").style.background = "yellow";
+    }
+    else if (board[2] === turn && board[5] === turn && board[8] === turn) {
+      document.querySelector(".button2").style.background = "yellow";
+      document.querySelector(".button5").style.background = "yellow";
+      document.querySelector(".button8").style.background = "yellow";
+    }
+    else if (board[0] === turn && board[4] === turn && board[8] === turn) {
+      document.querySelector(".button0").style.background = "yellow";
+      document.querySelector(".button4").style.background = "yellow";
+      document.querySelector(".button8").style.background = "yellow";
+    }
+    else if (board[2] === turn && board[4] === turn && board[6] === turn)  {
+      document.querySelector(".button2").style.background = "yellow";
+      document.querySelector(".button4").style.background = "yellow";
+      document.querySelector(".button6").style.background = "yellow";
     }
   }
 
@@ -75,26 +125,32 @@ class App extends Component {
 
   updateSquare = (e, index) => {
     e.preventDefault()
-    const { human, computer, turn, numberOfPlayers } = this.state
-    const board = [...this.state.board]
-    this.setState({ board })
-    this.checkWin(board, human)
-    this.switchTurn(board, index, human, computer, turn)
-    if (numberOfPlayers === 1) {
-      this.aiTurn(board)
-    } 
+    let { human, computer, turn, numberOfPlayers } = this.state
+    let newBoard = [...this.state.board]
+    if (newBoard[index] !== "X" && newBoard[index] !== "O") {
+      newBoard[index] = turn
+      if (turn === human) { turn = computer } 
+      else if (turn === computer) { turn = human }
+      this.setState({ board: newBoard, turn })
+      this.checkWin(newBoard, human)
+
+      if (numberOfPlayers === 1) { this.aiTurn(newBoard) } 
+      if (numberOfPlayers === 2) { this.checkWin(newBoard, computer) }
+    }
   }
 
   returnToMenu = (e) => {
     e.preventDefault()
     let newBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-    this.setState({ board: newBoard, human: null, computer: null, turn: null, numberOfPlayers: null, humanGoesFirst: null})
+    this.setState({ board: newBoard, human: null, computer: null, turn: null, numberOfPlayers: null, humanGoesFirst: null, endOfGame: false})
+    this.unhighlightWiningSquares()
   }
 
   restartGame = () => {
     const { numberOfPlayers, humanGoesFirst } = this.state
     let newBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-    this.setState({ board: newBoard})
+    this.setState({ board: newBoard, endOfGame: false })
+    this.unhighlightWiningSquares()
     if (numberOfPlayers === 1 && !humanGoesFirst) {
       this.aiRandomSquare(newBoard)
     }

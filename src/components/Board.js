@@ -20,6 +20,7 @@ class Board extends Component {
 
     return (
       <Square
+        {...this.props}
         value={value}
         index={index}
         updateSquare={this.props.updateSquare}
