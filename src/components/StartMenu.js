@@ -4,13 +4,13 @@ import Options from './Options'
 
 class StartMenu extends Component {
   versusAI = () => {
-    let numberOfPlayers = 1
-    this.props.updatePlayers(numberOfPlayers)
+    let playerCount = 1
+    this.props.updatePlayers(playerCount)
   }
   
   versusPlayer = () => {
-    let numberOfPlayers = 2
-    this.props.updatePlayers(numberOfPlayers)
+    let playerCount = 2
+    this.props.updatePlayers(playerCount)
   }
 
   pickMarkerX = () => {
@@ -27,47 +27,47 @@ class StartMenu extends Component {
 
   goingFirst = () => {
     let { human } = this.props
-    this.props.updateTurn(true, human)
+    this.props.updateTurns(true, human)
   }
   
   notFirst = () => {
     let { computer } = this.props
-    this.props.updateTurn(false, computer)
+    this.props.updateTurns(false, computer)
   }
 
   render () {
     return (
     <div> 
       <h1>T<span className="titlePart">ic</span> T<span className="titlePart">ac</span> T<span className="titlePart">oe</span></h1>
-      {!this.props.gameStarted && this.props.numberOfPlayers === null &&
+      { this.props.playerCount === null &&
         <Options 
           {...this.props}
           title='Against AI or Player?' 
           idName="players"
           optionOne='AI'
-          handleClickOne={this.versusAI}
+          clickHandlerOne={this.versusAI}
           optionTwo='Player'
-          handleClickTwo={this.versusPlayer}
+          clickHandlerTwo={this.versusPlayer}
           />
       }
-      { this.props.numberOfPlayers && this.props.human === null && 
+      { this.props.playerCount && this.props.human === null && 
         <Options 
           title='Play as X or O?' 
           idName="markers"
           optionOne='X'
-          handleClickOne={this.pickMarkerX}
+          clickHandlerOne={this.pickMarkerX}
           optionTwo='O'
-          handleClickTwo={this.pickMarkerO}
+          clickHandlerTwo={this.pickMarkerO}
         />
       }
-      { this.props.human && this.props.humanGoesFirst === null &&
+      { this.props.human && this.props.humanFirst === null &&
         <Options 
           title='Want to go first?' 
           idName="turns"
           optionOne='Yes'
-          handleClickOne={this.goingFirst}
+          clickHandlerOne={this.goingFirst}
           optionTwo='No'
-          handleClickTwo={this.notFirst}
+          clickHandlerTwo={this.notFirst}
         />
       }
     </div>

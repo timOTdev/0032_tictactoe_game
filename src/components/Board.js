@@ -5,8 +5,8 @@ import Square from './Square'
 class Board extends Component {
   componentDidMount () {
     let { board } = this.props
-    if (this.props.numberOfPlayers === 1 && !this.props.humanGoesFirst) {
-      this.props.aiRandomSquare(board)
+    if (this.props.playerCount === 1 && !this.props.humanFirst) {
+      this.props.aiRandom(board)
     }
   }
 
@@ -23,14 +23,14 @@ class Board extends Component {
         {...this.props}
         value={value}
         index={index}
-        updateSquare={this.props.updateSquare}
+        markSquare={this.props.markSquare}
       />
     )
   }
 
-  returnToMenuHandler = (e) => {
+  returnMenuHandler = (e) => {
     e.preventDefault()
-    this.props.returnToMenu()
+    this.props.returnMenu()
   }
 
   resetGameHandler = (e) => {
@@ -57,7 +57,7 @@ class Board extends Component {
           {this.createSquare(7)}
           {this.createSquare(8)}
         </div>
-        <span className="Board_menu"onClick={(e) => this.returnToMenuHandler(e)}>Menu</span>
+        <span className="Board_menu" onClick={(e) => this.returnMenuHandler(e)}>Menu</span>
         <span className="Board_reset" onClick={(e) => this.resetGameHandler(e)}>Reset</span>
       </div>
     )

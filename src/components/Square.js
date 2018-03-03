@@ -2,8 +2,8 @@ import React from 'react'
 
 const Square = (props) => {
   return (
-    <button className={"button"+ props.index + (props.endOfGame ? " ended" : " notEnded")}
-      onClick={(e) => props.updateSquare(e, props.index)}
+    <button className={"button"+ props.index + (props.gameEnded ? " ended" : " notEnded")}
+      onClick={(e) => props.markSquare(e, props.index)}
     >
       {props.value}
     </button>

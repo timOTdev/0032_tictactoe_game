@@ -4,10 +4,10 @@ const Options = (props) => {
   return (
     <div className="Options" id={props.idName}>
       <p>{props.title}</p>
-      <span onClick={props.handleClickOne}>
+      <span onClick={props.clickHandlerOne}>
         {props.optionOne}
       </span>
-      <span onClick={props.handleClickTwo}>
+      <span onClick={props.clickHandlerTwo}>
         {props.optionTwo}
       </span>
     </div>
