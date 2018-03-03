@@ -26,7 +26,7 @@ class App extends Component {
   }
 
   keyDown = (e) => {
-    console.log(e.key)
+    e.preventDefault()
     switch(e.key) {
       case "1": this.markSquare(e, 6); break
       case "2": this.markSquare(e, 7); break
@@ -37,7 +37,7 @@ class App extends Component {
       case "7": this.markSquare(e, 0); break
       case "8": this.markSquare(e, 1); break
       case "9": this.markSquare(e, 2); break
-      case "0": this.returnMenu(e); break
+      case "0": this.returnMenu(); break
       case "Enter": this.resetGame(); break
       default: break
     }
@@ -80,11 +80,20 @@ class App extends Component {
   }
 
   // Game Mechanics
-  aiRandom = (board) => {
-    let { computer, human } = this.state
-    let randomSquare = Math.floor(Math.random() * 9)
-    board[randomSquare] = computer
-    this.setState({ board, turn: human })
+  markSquare = (e, index) => {
+    e.preventDefault()
+    let { human, computer, turn, playerCount, gameEnded } = this.state
+    let newBoard = [...this.state.board]
+    if (newBoard[index] !== "X" && newBoard[index] !== "O" && !gameEnded) {
+      newBoard[index] = turn
+      if (turn === human) { turn = computer } 
+      else if (turn === computer) { turn = human }
+      this.setState({ board: newBoard, turn })
+      this.gameWon(newBoard, human)
+
+      if (playerCount === 1) { this.aiTurn(newBoard) } 
+      if (playerCount === 2) { this.gameWon(newBoard, computer) }
+    }
   }
 
   aiTurn = (board) => {
@@ -116,30 +125,21 @@ class App extends Component {
     }
   }
 
-  markSquare = (e, index) => {
-    e.preventDefault()
-    let { human, computer, turn, playerCount, gameEnded } = this.state
-    let newBoard = [...this.state.board]
-    if (newBoard[index] !== "X" && newBoard[index] !== "O" && !gameEnded) {
-      newBoard[index] = turn
-      if (turn === human) { turn = computer } 
-      else if (turn === computer) { turn = human }
-      this.setState({ board: newBoard, turn })
-      this.gameWon(newBoard, human)
-
-      if (playerCount === 1) { this.aiTurn(newBoard) } 
-      if (playerCount === 2) { this.gameWon(newBoard, computer) }
-    }
+  // AI Mechanics
+  aiRandom = (board) => {
+    let { computer, human } = this.state
+    let randomSquare = Math.floor(Math.random() * 9)
+    board[randomSquare] = computer
+    this.setState({ board, turn: human })
   }
 
-  // AI Mechanics
   findEmptySquares = (board) => {
     let emptySquares = []
     board.forEach((value, index) => value !== "X" && value !== "O" ? emptySquares.push(index) : null)
     return emptySquares
   }
 
-  tempWin = (board, turn) => {
+  checkWin = (board, turn) => {
     if (
       (board[0] === turn && board[1] === turn && board[2] === turn) ||
       (board[3] === turn && board[4] === turn && board[5] === turn) ||
@@ -163,9 +163,9 @@ class App extends Component {
     const emptySquares = this.findEmptySquares(newBoard)
     const moves = []
 
-    if (this.tempWin(newBoard, human)) {
+    if (this.checkWin(newBoard, human)) {
       return { score: -10 }
-    } else if (this.tempWin(newBoard, computer)) {
+    } else if (this.checkWin(newBoard, computer)) {
       return { score: 10 }
     } else if (emptySquares.length === 0) {
       return { score: 0 }
@@ -209,15 +209,6 @@ class App extends Component {
   }
 
   // Visual Mechanics
-  unfocusWon = () => {
-    const numbers = Array.from(Array(9).keys())
-    for (let num of numbers) { createSelector(num) }
-
-    function createSelector(num) {
-      return document.querySelector(`.button${num}`).style.background = null
-    }
-  }
-
   focusWon = (board, turn) => {
     if (board[0] === turn && board[1] === turn && board[2] === turn) { createSelector(0); createSelector(1); createSelector(2) }
     else if (board[3] === turn && board[4] === turn && board[5] === turn) { createSelector(3); createSelector(4); createSelector(5) }
@@ -233,11 +224,21 @@ class App extends Component {
     }
   }
 
+  unfocusWon = () => {
+    const numbers = Array.from(Array(9).keys())
+    for (let num of numbers) { createSelector(num) }
+
+    function createSelector(num) {
+      return document.querySelector(`.button${num}`).style.background = null
+    }
+  }
+
   render() {
     return (
       <div className="App">
       { this.state.humanFirst !== null ? (
-        <Board {...this.state} 
+        <Board 
+          {...this.state} 
           markSquare={this.markSquare}
           returnMenu={this.returnMenu}
           resetGame={this.resetGame}
@@ -251,7 +252,7 @@ class App extends Component {
         />)
       }
       </div>
-    );
+    )
   }
 }
 
