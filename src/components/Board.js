@@ -56,8 +56,15 @@ class Board extends Component {
           {this.createSquare(7)}
           {this.createSquare(8)}
         </div>
-        <span className="Board_menu" onClick={(e) => this.returnMenuHandler(e)}>Menu</span>
-        <span className="Board_reset" onClick={(e) => this.resetGameHandler(e)}>Reset</span>
+        
+        <div className="Menus">
+          <span className="Board_menu" onClick={(e) => this.returnMenuHandler(e)}>Menu</span>
+          <span className="Board_reset" onClick={(e) => this.resetGameHandler(e)}>Reset</span>
+        </div>
+        
+        <div className="Footer">
+          <a href="http://timothyhoang.net/">Copyright © 2018 Timothy Hoang</a> 
+        </div>
       </div>
     )
   }

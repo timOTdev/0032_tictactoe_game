@@ -194,3 +194,16 @@ html, body {
 .Board .ended {
   background: mediumseagreen;
 }
+
+.Menus {
+  display: block;
+  width: 100%;
+  padding: 2em;
+}
+
+/* Footer */
+.Footer {
+  display: block;
+  width: 100%;
+  font-size: 0.75em;
+}

@@ -242,26 +242,26 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <h1>T<span className="titlePart">ic</span> T<span className="titlePart">ac</span> T<span className="titlePart">oe</span></h1>
-      { !this.state.introIsRunning && this.state.humanFirst !== null ? (
-        <Board 
-          {...this.state} 
-          markSquare={this.markSquare}
-          returnMenu={this.returnMenu}
-          resetGame={this.resetGame}
-          aiRandom={this.aiRandom}
-        />)
-        : null
-      }
+        <h1>T<span className="titlePart">ic</span> T<span className="titlePart">ac</span> T<span className="titlePart">oe</span></h1>
+        { !this.state.introIsRunning && this.state.humanFirst !== null ? (
+          <Board 
+            {...this.state} 
+            markSquare={this.markSquare}
+            returnMenu={this.returnMenu}
+            resetGame={this.resetGame}
+            aiRandom={this.aiRandom}
+          />)
+          : null
+        }
 
-      { this.state.introIsRunning ? <Intro /> 
-        : (<StartMenu 
-          {...this.state} 
-          updatePlayers={this.updatePlayers}
-          updateMarkers={this.updateMarkers}
-          updateTurns={this.updateTurns}
-        />) 
-      }
+        { this.state.introIsRunning ? <Intro /> 
+          : (<StartMenu 
+            {...this.state} 
+            updatePlayers={this.updatePlayers}
+            updateMarkers={this.updateMarkers}
+            updateTurns={this.updateTurns}
+          />) 
+        }
       </div>
     )
   }
