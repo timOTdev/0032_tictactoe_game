@@ -41,7 +41,6 @@ class Board extends Component {
   render() {
     return (
       <div className="Board">
-        <h1>T<span className="titlePart">ic</span> T<span className="titlePart">ac</span> T<span className="titlePart">oe</span></h1>
         <div className="row">
           {this.createSquare(0)}
           {this.createSquare(1)}

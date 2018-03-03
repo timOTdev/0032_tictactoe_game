@@ -4,21 +4,47 @@ html, body {
   text-align: center;
 }
 
-h1 {
-  color: seagreen;
-  text-decoration: underline overline solid black;
-  font-size: 2em;
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
-.titlePart {
-  color: mediumseagreen;
+@keyframes fadeinGrow {
+  from { opacity: 0; }
+  to   { opacity: 1; font-size: 4em; }
+}
+
+@keyframes fadeinLite {
+  from { opacity: 0; }
+  to   { opacity: 0.5; }
 }
 
 /* App */
 .App {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   font-family: 'Rock Salt', cursive;
+}
+
+.App h1 {
+  color: seagreen;
+  text-decoration: underline overline solid black;
+  font-size: 2em;
+  text-align: center;
+  min-width: 100%;
+}
+
+.App .titlePart {
+  color: mediumseagreen;
+}
+
+/* Intro */
+.Intro h2 {
+  animation: fadeinGrow 5s; 
+  margin: 1em;
+  padding: 1em;
+  font-size: 3em;
 }
 
 /* Start Menu */
@@ -51,24 +77,32 @@ h1 {
   cursor: pointer;
 }
 
+#players {
+  animation: fadein 1s;
+}
+
 #players::after {
+  animation: fadein 5s; 
   content: "";
   background: url("../assets/images/bamboo1.png") no-repeat right top;
-  background-size: contain;
-  opacity: 0.1;
+  background-size: cover;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
   position: absolute;
   z-index: -1;   
+}
+
+#markers {
+  animation: fadein 1s;
 }
 
 #markers::after {
+  animation: fadein 5s; 
   content: "";
   background: url("../assets/images/bamboo2.png") no-repeat left top;
   background-size: contain;
-  opacity: 0.1;
   top: 0;
   left: 0;
   bottom: 0;
@@ -77,11 +111,15 @@ h1 {
   z-index: -1;   
 }
 
+#turns {
+  animation: fadein 1s;
+}
+
 #turns::after {
+  animation: fadein 5s; 
   content: "";
   background: url("../assets/images/bamboo3.png") no-repeat right top;
   background-size: contain;
-  opacity: 0.1;
   top: 0;
   left: 0;
   bottom: 0;
@@ -97,13 +135,15 @@ h1 {
   justify-content: center;
   height: 690px;
   width: 690px;
+  animation: fadein 2s; 
 }
 
 .Board::after {
+  animation: fadeinLite 20s; 
   content: "";
   background: url("../assets/images/bamboo4.png") no-repeat left center;
   background-size: contain;
-  opacity: 0.1;
+  opacity: 0.5;
   top: 0;
   left: 0;
   bottom: 0;

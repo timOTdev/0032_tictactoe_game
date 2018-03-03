@@ -38,7 +38,6 @@ class StartMenu extends Component {
   render () {
     return (
     <div> 
-      <h1>T<span className="titlePart">ic</span> T<span className="titlePart">ac</span> T<span className="titlePart">oe</span></h1>
       { this.props.playerCount === null &&
         <Options 
           {...this.props}

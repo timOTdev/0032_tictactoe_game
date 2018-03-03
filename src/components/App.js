@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 
-import Board from './Board'
+import Intro from './Intro'
 import StartMenu from './StartMenu'
+import Board from './Board'
+
 class App extends Component {  
   constructor() {
     super()
@@ -13,12 +15,16 @@ class App extends Component {
       playerCount: null,
       humanFirst: null,
       gameEnded: false,
+      introIsRunning: true
     }
   }
 
   // Keyboard Events
   componentDidMount() {
     document.addEventListener("keydown", this.keyDown)
+    setTimeout(function() { 
+      this.setState({introIsRunning: false})
+    }.bind(this), 4000);
   }
 
   componentWillUnmount() {
@@ -210,7 +216,7 @@ class App extends Component {
 
   // Visual Mechanics
   focusWon = (board, turn) => {
-    if (board[0] === turn && board[1] === turn && board[2] === turn) { createSelector(0); createSelector(1); createSelector(2) }
+    if      (board[0] === turn && board[1] === turn && board[2] === turn) { createSelector(0); createSelector(1); createSelector(2) }
     else if (board[3] === turn && board[4] === turn && board[5] === turn) { createSelector(3); createSelector(4); createSelector(5) }
     else if (board[6] === turn && board[7] === turn && board[8] === turn) { createSelector(6); createSelector(7); createSelector(8) }
     else if (board[0] === turn && board[3] === turn && board[6] === turn) { createSelector(0); createSelector(3); createSelector(6) }
@@ -236,7 +242,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      { this.state.humanFirst !== null ? (
+      <h1>T<span className="titlePart">ic</span> T<span className="titlePart">ac</span> T<span className="titlePart">oe</span></h1>
+      { !this.state.introIsRunning && this.state.humanFirst !== null ? (
         <Board 
           {...this.state} 
           markSquare={this.markSquare}
@@ -244,12 +251,16 @@ class App extends Component {
           resetGame={this.resetGame}
           aiRandom={this.aiRandom}
         />)
+        : null
+      }
+
+      { this.state.introIsRunning ? <Intro /> 
         : (<StartMenu 
-            {...this.state} 
-            updatePlayers={this.updatePlayers}
-            updateMarkers={this.updateMarkers}
-            updateTurns={this.updateTurns}
-        />)
+          {...this.state} 
+          updatePlayers={this.updatePlayers}
+          updateMarkers={this.updateMarkers}
+          updateTurns={this.updateTurns}
+        />) 
       }
       </div>
     )
