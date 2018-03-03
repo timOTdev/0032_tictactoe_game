@@ -53,7 +53,7 @@ h1 {
 
 #players::after {
   content: "";
-  background: url("../assets/images/bamboo1.png") no-repeat left top;
+  background: url("../assets/images/bamboo1.png") no-repeat right top;
   background-size: contain;
   opacity: 0.1;
   top: 0;
@@ -66,7 +66,7 @@ h1 {
 
 #markers::after {
   content: "";
-  background: url("../assets/images/bamboo1.png") no-repeat right top;
+  background: url("../assets/images/bamboo2.png") no-repeat left top;
   background-size: contain;
   opacity: 0.1;
   top: 0;
@@ -79,7 +79,7 @@ h1 {
 
 #turns::after {
   content: "";
-  background: url("../assets/images/bamboo1.png") no-repeat left top;
+  background: url("../assets/images/bamboo3.png") no-repeat right top;
   background-size: contain;
   opacity: 0.1;
   top: 0;
@@ -101,8 +101,8 @@ h1 {
 
 .Board::after {
   content: "";
-  background: url("../assets/images/bamboo2.png") no-repeat right top;
-  background-size: cover;
+  background: url("../assets/images/bamboo4.png") no-repeat left center;
+  background-size: contain;
   opacity: 0.1;
   top: 0;
   left: 0;
