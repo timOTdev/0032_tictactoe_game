@@ -2,14 +2,14 @@ import React from 'react'
 
 const Options = (props) => {
   return (
-    <div>
+    <div className="Options" id={props.idName}>
       <p>{props.title}</p>
-      <button className='button' onClick={props.handleClickOne}>
+      <span onClick={props.handleClickOne}>
         {props.optionOne}
-      </button>
-      <button className='button' onClick={props.handleClickTwo}>
+      </span>
+      <span onClick={props.handleClickTwo}>
         {props.optionTwo}
-      </button>
+      </span>
     </div>
   )
 }

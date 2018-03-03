@@ -38,20 +38,22 @@ class StartMenu extends Component {
   render () {
     return (
     <div> 
-      <h1 className='game-title'>Tic Tac Toe</h1>
+      <h1>T<span className="titlePart">ic</span> T<span className="titlePart">ac</span> T<span className="titlePart">oe</span></h1>
       {!this.props.gameStarted && this.props.numberOfPlayers === null &&
         <Options 
           {...this.props}
           title='Against AI or Player?' 
+          idName="players"
           optionOne='AI'
           handleClickOne={this.versusAI}
           optionTwo='Player'
           handleClickTwo={this.versusPlayer}
-        />
+          />
       }
       { this.props.numberOfPlayers && this.props.human === null && 
         <Options 
-          title='X or O?' 
+          title='Play as X or O?' 
+          idName="markers"
           optionOne='X'
           handleClickOne={this.pickMarkerX}
           optionTwo='O'
@@ -60,7 +62,8 @@ class StartMenu extends Component {
       }
       { this.props.human && this.props.humanGoesFirst === null &&
         <Options 
-          title='Go first?' 
+          title='Want to go first?' 
+          idName="turns"
           optionOne='Yes'
           handleClickOne={this.goingFirst}
           optionTwo='No'

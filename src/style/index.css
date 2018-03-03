@@ -4,47 +4,153 @@ html, body {
   text-align: center;
 }
 
+h1 {
+  color: seagreen;
+  text-decoration: underline overline solid black;
+  font-size: 2em;
+}
+
+.titlePart {
+  color: mediumseagreen;
+}
+
+/* App */
 .App {
   display: flex;
   justify-content: center;
+  font-family: 'Rock Salt', cursive;
 }
 
+/* Start Menu */
+.Options {
+  display: block;
+  font-family: 'Finger Paint', cursive;
+}
+
+.Options p {
+  margin: 1em;
+  padding: 1em;
+  font-size: 2em;
+}
+
+.Options span {
+  display: inline-block;
+  border: 5px solid black;
+  border-radius: 10%;
+  padding: 1em;
+  margin: 1em;
+  width: 15%;
+  color: mediumseagreen;
+  font-size: 1em;
+}
+
+.Options span:hover {
+  border: 5px solid mediumseagreen; 
+  background: black;
+  color: white;
+  cursor: pointer;
+}
+
+#players::after {
+  content: "";
+  background: url("../assets/images/bamboo1.png") no-repeat left top;
+  background-size: contain;
+  opacity: 0.1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
+#markers::after {
+  content: "";
+  background: url("../assets/images/bamboo1.png") no-repeat right top;
+  background-size: contain;
+  opacity: 0.1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
+#turns::after {
+  content: "";
+  background: url("../assets/images/bamboo1.png") no-repeat left top;
+  background-size: contain;
+  opacity: 0.1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
+/* Board */
 .Board {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  height: 600px;
-  width: 600px;
+  height: 690px;
+  width: 690px;
 }
 
-button {
+.Board::after {
+  content: "";
+  background: url("../assets/images/bamboo2.png") no-repeat right top;
+  background-size: cover;
+  opacity: 0.1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
+.Board button {
   vertical-align: top;
-  margin: 0;
+  margin: 0.1em;
   padding: 0;
   height: 200px;
   width: 200px;
-  font-size: 40px; 
+  font-size: 4em; 
+  font-family: 'Finger Paint', cursive;
+  background: none;
+  outline: none;
+  border-radius: 10%;
+  border: 0.1em solid mediumseagreen;
+  text-shadow: 3px 3px 3px gray;
 }
 
-button:hover {
-  background: goldenrod;
+.Board button:hover {
+  border: 0.1em solid black;
+  background: mediumseagreen;
 }
 
-.ended {
-  background: goldenrod;
-}
-
-span {
-  border: 1px solid black;
+.Board_menu,
+.Board_reset {
+  border: 5px solid black;
+  border-radius: 10%;
   padding: 1em;
   margin: 1em;
+  width: 15%;
+  color: mediumseagreen;
+  font-size: 1em;
 }
 
-span:hover {
-  background: goldenrod;
-}
-
-.menu:hover,
-.restart:hover {
+.Board_menu:hover,
+.Board_reset:hover {
+  border: 5px solid mediumseagreen; 
+  background: black;
+  color: white;
   cursor: pointer;
+}
+
+.Board .ended {
+  background: mediumseagreen;
 }

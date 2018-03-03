@@ -28,15 +28,20 @@ class Board extends Component {
     )
   }
 
-  restartHandler = (e) => {
+  returnToMenuHandler = (e) => {
     e.preventDefault()
-    this.props.restartGame()
+    this.props.returnToMenu()
+  }
+
+  resetGameHandler = (e) => {
+    e.preventDefault()
+    this.props.resetGame()
   }
 
   render() {
     return (
       <div className="Board">
-        <h1>Tic Tac Toe</h1>
+        <h1>T<span className="titlePart">ic</span> T<span className="titlePart">ac</span> T<span className="titlePart">oe</span></h1>
         <div className="row">
           {this.createSquare(0)}
           {this.createSquare(1)}
@@ -52,8 +57,8 @@ class Board extends Component {
           {this.createSquare(7)}
           {this.createSquare(8)}
         </div>
-        <span className="menu" onClick={(e) => this.props.returnToMenu(e)}>Menu</span>
-        <span className="restart" onClick={(e) => this.restartHandler(e)}>Restart</span>
+        <span className="Board_menu"onClick={(e) => this.returnToMenuHandler(e)}>Menu</span>
+        <span className="Board_reset" onClick={(e) => this.resetGameHandler(e)}>Reset</span>
       </div>
     )
   }
