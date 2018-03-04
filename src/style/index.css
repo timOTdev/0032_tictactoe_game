@@ -40,6 +40,19 @@ html, body {
 }
 
 /* Intro */
+#Intro::after {
+  animation: fadein 6s;
+  content: "";
+  background: url("../assets/images/intro.png") no-repeat center left;
+  background-size: contain;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
 .Intro h2 {
   animation: fadeinGrow 5s; 
   margin: 1em;
