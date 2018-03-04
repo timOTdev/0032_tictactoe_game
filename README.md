@@ -50,7 +50,7 @@
 
 - In this algorithm, the computer plays the role of the maximizer and the human is the minimizer. When it is the computer's turn, the algorithm will find all the empty squares and loop through all the spaces. The computer will place a marker in the first empty space, then alternate with the player's marker to the next empty space, then alternates back to the computer, and so on. This meta process occurs until it reaches a terminal state. 
 
--Upon reaching the terminal state and it is a win for the computer, the score will return a positive 10. If it's loss for the computer, it will return a negative 10. If that iteration does not have a terminal state, the algorithm will continue running deeper until it reaches that state. The score then passes up to the original first square that the computer marked. Subsequently, each square now has a score that the computer can evaluate to calculate the best move. In a sense, the computer can calculate and see all the possibilities of the end of the game and can pick the best path to win. It evaluates all these possibilities on every turn and follow destiny to either a win or a minimum, a draw state. This is the beauty of the MiniMax Algorithm.
+- Upon reaching the terminal state and it is a win for the computer, the score will return a positive 10. If it's loss for the computer, it will return a negative 10. If that iteration does not have a terminal state, the algorithm will continue running deeper until it reaches that state. The score then passes up to the original first square that the computer marked. Subsequently, each square now has a score that the computer can evaluate to calculate the best move. In a sense, the computer can calculate and see all the possibilities of the end of the game and can pick the best path to win. It evaluates all these possibilities on every turn and follow destiny to either a win or a minimum, a draw state. This is the beauty of the MiniMax Algorithm.
 
 - There are a ton of youtube videos, articles, and repositories of some incredible renditions of this projects so stop by your local search line on Google to find more 
 - Some recommended resources are:
@@ -62,7 +62,7 @@
 - HTML
 - CSS
 - JavaScript
-- ReactJS
+- ReactJS (Create-React-App)
 
 ## To view this app online
 - To view deployed app, visit: https://timh1203.github.io/tictactoe-game
