@@ -220,3 +220,79 @@ html, body {
   width: 100%;
   font-size: 0.75em;
 }
+
+@media all and (max-width: 1000px) {
+  /* Intro */
+  #Intro::after {
+    background-size: cover;
+  }
+
+  .Intro h2 {
+    font-size: 2.5em;
+  }
+
+  /* Start Menu */
+  .Options p {
+    text-shadow: 3px 3px 3px white;
+  }
+
+  .Options span {
+    background: white;
+  }
+
+  #players::after {
+    background-size: cover;
+  }
+
+  #markers::after {
+    background-size: cover;
+  }
+
+  #turns::after {
+    background-size: cover;
+  }
+
+  /* Board */
+  .Board {
+    height: 517.5px;
+    width: 517.5px;
+  }
+
+  .Board::after {
+    background-size: cover;
+  }
+
+  .Board button {
+    height: 150px;
+    width: 150px;
+    font-size: 3em; 
+    border: 0.1em solid black;
+  }
+  
+  .Board button:hover {
+    border: 0.2em solid seagreen;
+  }
+}
+
+@media all and (max-width: 500px) {
+  /* Intro */
+  .Intro h2 {
+    font-size: 2em;
+  }
+
+  /* Board */
+  .Board {
+    height: 345px;
+    width: 345px;
+  }
+
+  .Board button {
+    height: 100px;
+    width: 100px;
+    font-size: 2em; 
+  }
+  
+  .Board button:hover {
+    border: 0.2em solid seagreen;
+  }
+}
