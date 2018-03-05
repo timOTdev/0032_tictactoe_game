@@ -98,7 +98,7 @@ html, body {
   animation: fadein 5s; 
   content: "";
   background: url("../assets/images/bamboo1.png") no-repeat right top;
-  background-size: cover;
+  background-size: contain;
   top: 0;
   left: 0;
   bottom: 0;
