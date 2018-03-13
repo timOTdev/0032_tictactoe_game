@@ -2,6 +2,16 @@
 
 <figure><img src="./readme/game.png" alt="Tic Tac Toe Game" style="width: 60%; display: block; margin-left: auto; margin-right: auto;"/></figure>
 
+## To view this app online
+- To view deployed app, visit: https://timh1203.github.io/tictactoe-game
+
+## To edit the source code
+- Github Repo: https://github.com/timh1203/tictactoe-game
+1. Have NPM and NodeJS installed on your computer
+2. Navigate to the directory of choice and type `git clone https://github.com/timh1203/tictactoe-game`
+3. Alternatively, you can also fork the repo and clone it (no future updates planned)
+4. Open up your favorite editor and have fun!
+
 ## About
 - [Tic Tac Toe](https://en.wikipedia.org/wiki/Tic-tac-toe) is a game that has been traced back to ancient Egypt
 - It's also known as Noughts and Crosses
@@ -63,16 +73,7 @@
 - CSS
 - JavaScript
 - ReactJS (Create-React-App)
-
-## To view this app online
-- To view deployed app, visit: https://timh1203.github.io/tictactoe-game
-
-## To edit the source code
-- Github Repo: https://github.com/timh1203/tictactoe-game
-1. Have NPM and NodeJS installed on your computer
-2. Navigate to the directory of choice and type `git clone https://github.com/timh1203/tictactoe-game`
-3. Alternatively, you can also fork the repo and clone it (no future updates planned)
-4. Open up your favorite editor and have fun!
+- Images provided by [PNG Tree](https://pngtree.com/)
 
 ## More pictures
 ### Intro Screen
