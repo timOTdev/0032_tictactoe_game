@@ -1,4 +1,4 @@
-# Tic Tac Toe Game by Timothy Hoang
+# 0032_tictactoe_game
 
 <figure><img src="./readme/game.png" alt="Tic Tac Toe Game" style="width: 60%; display: block; margin-left: auto; margin-right: auto;"/></figure>
 
